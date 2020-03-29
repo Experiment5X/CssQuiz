@@ -21,15 +21,6 @@ export interface ElementPair {
     children: ElementChild[]
 }
 
-export const fakeViewPortContainer: CSSProperties = {
-    position: 'relative',
-    display: 'flow-root',
-
-    width: '400px',
-    height: '400px',
-    border: '1px solid red'
-};
-
 const initialContainer: CSSProperties = {
     border: '3px solid grey'
 };
