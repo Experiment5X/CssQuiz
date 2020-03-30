@@ -32,6 +32,7 @@ const childrenColors: ColorCombo[] = [
     { commonName: 'Red', darkColor: '#b32212', color: '#e05b4c', lightColor: '#f29288' },
     { commonName: 'Blue', darkColor: '#0e3db3', color: '#296fd9', lightColor: '#4b91fa' },
     { commonName: 'Green', darkColor: '#07693d', color: '#1a9c62', lightColor: '#51c491' },
+    { commonName: 'Orange', darkColor: '#a87100', color: '#d18e04', lightColor: '#f5c056' }
 ];
 
 const randInt = (max: number) => Math.floor(Math.random() * max);
@@ -39,7 +40,7 @@ const randInt = (max: number) => Math.floor(Math.random() * max);
 const generateRandomElement = (properties: {[name: string]: string[]}) => {
     const element: any = {};
     const allPropertyNames = new Set(Object.keys(properties));
-    const totalPropertyCount = randInt(allPropertyNames.size);
+    const totalPropertyCount = randInt(allPropertyNames.size) + 1;
 
     for (let propCounter = 0; propCounter < totalPropertyCount; propCounter++) {
         // pick a random property
@@ -66,8 +67,8 @@ export const generateBlockPair = (count: number) => {
     const childProperties = {
         display: ['block', 'inline'],
         position: ['relative', 'static', 'absolute'],
-        margin: ['0', '10px 0', '0 10px', '10px 0 0 0', '0 0 10px 0', '0 10px 0 0'],
-        padding: ['0', '10px 0', '0 10px', '10px 0 0 0', '0 0 10px 0', '0 10px 0 0'],
+        margin: ['10px 0', '0 10px', '10px 0 0 0', '0 0 10px 0', '0 10px 0 0'],
+        padding: ['10px 0', '0 10px', '10px 0 0 0', '0 0 10px 0', '0 10px 0 0'],
     };
 
     const pair: Partial<ElementPair> = {

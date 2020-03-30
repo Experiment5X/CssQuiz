@@ -47,7 +47,7 @@ const QuestionResult = ({ checkedAnswer, allCorrect }) => {
 };
 
 export const Question = () => {
-  const [pair, _] = useState<Partial<ElementPair>>(generateBlockPair(3));
+  const [pair, _] = useState<Partial<ElementPair>>(generateBlockPair(4));
   // @ts-ignore
   const answerOptionOrder = [...pair.children];
   shuffle(answerOptionOrder);
@@ -98,7 +98,7 @@ export const Question = () => {
         <AnswerOption key={index}>
           <AnswerOptionDropdown
             key={index}
-            placeholder="Select a box"
+            placeholder="Select the element"
             options={dropdownColorOptions}
             value={selectedValues[child.color.commonName]}
             onChange={(selectedValue) => onAnswerOptionSelected(selectedValue, child)}
@@ -147,7 +147,7 @@ interface BoxProps {
 }
 
 const AnswerOptionDropdown = styled(Dropdown)`
-  width: 10rem;
+  width: 13rem;
   margin-right: 1rem;
   align-self: flex-start;
 `;
