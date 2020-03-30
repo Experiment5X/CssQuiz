@@ -9,6 +9,7 @@ import Dropdown, {Option} from 'react-dropdown';
 import 'react-dropdown/style.css';
 import {Simulate} from "react-dom/test-utils";
 import Button from './Button'
+import LabeledContainer from "./LabeledContainer";
 
 /**
  * Shuffles array in place.
@@ -82,16 +83,18 @@ export const Question = () => {
 
 
   return <QuestionContainer>
-    <FakeViewport>
-      {pair.children && pair.children.map((child: ElementChild, index: number) =>
-        <Box key={index}
-             style={child.style}
-             borderSize={3}
-             {...child.color}
-        >
-          Some text content
-        </Box>
-      )}
+    <FakeViewport label="Viewport">
+      <Container label="Container">
+        {pair.children && pair.children.map((child: ElementChild, index: number) =>
+          <Box key={index}
+               style={child.style}
+               borderSize={3}
+               {...child.color}
+          >
+            Some text content
+          </Box>
+        )}
+      </Container>
     </FakeViewport>
     <OptionsContainer>
       {answerOptions.map((child: ElementChild, index: number) =>
@@ -130,13 +133,25 @@ const CssTextBox = styled(SyntaxHighlighter)`
   margin: 0 0 1rem 0;
 `;
 
-const FakeViewport = styled.div`
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%239f9f9f' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
-  position: relative;
+const FakeViewport = styled(LabeledContainer)`
   display: flow-root;
+  position: relative;
+  
   width: 400px;
   height: 400px;
+  
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%239f9f9f' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
   border: 3px solid black;
+  
+  &::before {
+    top: -1.1rem;
+  }
+`;
+
+const Container = styled(LabeledContainer)`
+  background-color: white;
+  margin: 2rem;
+  border: 1px solid black;
 `;
 
 interface BoxProps {
