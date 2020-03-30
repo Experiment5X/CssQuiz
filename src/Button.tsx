@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Button = styled.button`
   padding: 0.5rem 1.5rem;
   letter-spacing: 0.12rem;
+  height: max-content;
   
   font-size: 1.1rem;
   font-family: Helvetica, sans-serif;

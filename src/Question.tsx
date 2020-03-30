@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 import {CSSProperties} from 'react';
-import styled from 'styled-components'
-import {generateBlockPair, ElementChild, ElementPair} from './ElementPairGenerators';
+import styled, {ThemedStyledFunction} from 'styled-components'
+import {generateBlockPair, ElementChild, ElementPair, ColorCombo} from './ElementPairGenerators';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atelierEstuaryLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Dropdown, {Option} from 'react-dropdown';
@@ -10,6 +10,7 @@ import 'react-dropdown/style.css';
 import {Simulate} from "react-dom/test-utils";
 import Button from './Button'
 import LabeledContainer from "./LabeledContainer";
+import ColorSelector from "./ColorSelector";
 
 /**
  * Shuffles array in place.
@@ -63,10 +64,10 @@ export const Question = () => {
     dropdownColorOptions = pair.children.map(child => child.color.commonName);
   }
 
-  const onAnswerOptionSelected = (selectedOption: Option, child: ElementChild) => {
+  const onAnswerOptionSelected = (selectedColor: ColorCombo, child: ElementChild) => {
     setSelectedValues({
       ...selectedValues,
-      [child.color.commonName]: selectedOption.value
+      [child.color.commonName]: selectedColor.commonName
     });
     setCheckedAnswer(false);
   };
@@ -83,6 +84,9 @@ export const Question = () => {
 
 
   return <QuestionContainer>
+    <CssTextBox>
+      {containerCss}
+    </CssTextBox>
     <FakeViewport label="Viewport">
       <Container label="Container">
         {pair.children && pair.children.map((child: ElementChild, index: number) =>
@@ -99,13 +103,13 @@ export const Question = () => {
     <OptionsContainer>
       {answerOptions.map((child: ElementChild, index: number) =>
         <AnswerOption key={index}>
-          <AnswerOptionDropdown
-            key={index}
-            placeholder="Select the element"
-            options={dropdownColorOptions}
-            value={selectedValues[child.color.commonName]}
-            onChange={(selectedValue) => onAnswerOptionSelected(selectedValue, child)}
-          />
+          <QuestionColorSelector>
+            <ColorSelector
+              key={index}
+              colors={pair && pair.children ? pair.children.map(o => o.color) : []}
+              onChange={(selectedValue) => onAnswerOptionSelected(selectedValue, child)}
+            />
+          </QuestionColorSelector>
           <CssTextBox language="css" style={atelierEstuaryLight}>
             {`.box${index} {\n${JSToCSS(child.style)}}`}
           </CssTextBox>
@@ -148,11 +152,13 @@ const FakeViewport = styled(LabeledContainer)`
   }
 `;
 
-const Container = styled(LabeledContainer)`
+const containerCss = `
   background-color: white;
   margin: 2rem;
   border: 1px solid black;
 `;
+
+const Container = styled(LabeledContainer)([containerCss] as unknown as TemplateStringsArray);
 
 interface BoxProps {
   borderSize: number,
@@ -161,10 +167,8 @@ interface BoxProps {
   lightColor: string
 }
 
-const AnswerOptionDropdown = styled(Dropdown)`
-  width: 13rem;
-  margin-right: 1rem;
-  align-self: flex-start;
+const QuestionColorSelector = styled.div`
+  margin-right: 2rem;
 `;
 
 const AnswerOption = styled.div`

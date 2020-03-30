@@ -4,6 +4,7 @@ export interface ColorCombo {
     commonName: string,
     darkColor: string,
     color: string,
+    shadeColor: string,
     lightColor: string
 }
 
@@ -29,10 +30,10 @@ const initialChild: CSSProperties = {
 };
 
 const childrenColors: ColorCombo[] = [
-    { commonName: 'Red', darkColor: '#b32212', color: '#e05b4c', lightColor: '#f29288' },
-    { commonName: 'Blue', darkColor: '#0e3db3', color: '#296fd9', lightColor: '#4b91fa' },
-    { commonName: 'Green', darkColor: '#07693d', color: '#1a9c62', lightColor: '#51c491' },
-    { commonName: 'Orange', darkColor: '#a87100', color: '#d18e04', lightColor: '#f5c056' }
+    { commonName: 'Red', darkColor: '#b32212', shadeColor: '#d95445', color: '#e05b4c', lightColor: '#f29288' },
+    { commonName: 'Blue', darkColor: '#0e3db3', shadeColor: '#2166cf', color: '#296fd9', lightColor: '#4b91fa' },
+    { commonName: 'Green', darkColor: '#07693d', shadeColor: '#15965c', color: '#1a9c62', lightColor: '#51c491' },
+    { commonName: 'Orange', darkColor: '#a87100', shadeColor: '#c78704', color: '#d18e04', lightColor: '#f5c056' }
 ];
 
 const randInt = (max: number) => Math.floor(Math.random() * max);
