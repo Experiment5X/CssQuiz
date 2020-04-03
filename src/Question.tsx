@@ -168,12 +168,12 @@ interface BoxProps {
 }
 
 const QuestionColorSelector = styled.div`
-  margin-right: 2rem;
+  margin-right: 0;
 `;
 
 const AnswerOption = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const QuestionContainer = styled.div`
